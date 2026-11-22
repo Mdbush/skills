@@ -11,6 +11,9 @@ permissions:
 
 jobs:
   upgrade:
+    # This is an upstream-maintenance workflow, not a WOC requirement.
+    # Fail closed unless the repository owner explicitly opts in.
+    if: ${{ !github.event.repository.fork && vars.ENABLE_GH_AW_AUTO_UPGRADE == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
